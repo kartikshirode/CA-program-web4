@@ -6,10 +6,12 @@
   "type": "module",
   "scripts": {
     "dev": "live-server --host=localhost --port=3000 --open=/demo",
-    "build": "npm run build:js && npm run build:css",
+    "build": "npm run build:js && npm run build:css && npm run build:copy",
     "build:js": "rollup -c",
     "build:css": "npm run concat:css",
     "concat:css": "node build-css.js",
+    "build:copy": "node build-assets.cjs",
+    "vercel-build": "npm run build",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

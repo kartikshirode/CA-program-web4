@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.venv/
+
+# Source files (since we're deploying built files)
+src/
+tests/
+
+# Development files
+.eslintrc.json
+.prettierrc
+babel.config.cjs
+jest.config.cjs
+rollup.config.js
+build-assets.cjs
+build-css.js
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+CONTRIBUTING.md
+README.md
+
+# CI/CD
+.github/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

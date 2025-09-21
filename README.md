@@ -1,7 +1,50 @@
 # Accessible UI Components
 
 [![CI/CD](https://github.com/kartik/accessible-ui-components/workflows/CI/badge.svg)](https://github.com/kartik/accessible-ui-components/actions)
-[![Coverage](https://img.shields.io/codecov/c/github/kartik/accessible-ui-components)](https://codecov.io/gh/kartik/accessible-ui-components)
+[![Coverage](https://img.shields.io/codecov/c/github/kartik/accessible-ui-components)](https://codecov.io/gh/kartik## 🚀 Deployment
+
+### Vercel (Recommended)
+
+This project is optimized for deployment on Vercel:
+
+1. **Fork/Clone** this repository
+2. **Connect** to Vercel dashboard
+3. **Deploy** - Vercel will automatically detect the build settings
+4. **Access** your deployed site at `https://your-app-name.vercel.app`
+
+The project includes:
+- `vercel.json` configuration for routing and headers
+- Automated build process that generates optimized assets
+- Static file serving with proper caching headers
+
+### Manual Deployment
+
+For other static hosting providers:
+
+```bash
+# Build the project
+npm run build
+
+# Deploy the 'dist' folder to your hosting provider
+# The dist folder contains:
+# - index.html (landing page)
+# - demo/index.html (interactive demo)
+# - ui-components.js (component library)
+# - ui-components.css (styles)
+```
+
+## 🌐 Browser Compatibility
+
+- Chrome 60+
+- Firefox 60+
+- Safari 12+
+- Edge 79+
+- iOS Safari 12+
+- Android Chrome 60+
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.ui-components)
 [![npm version](https://img.shields.io/npm/v/accessible-ui-components.svg)](https://www.npmjs.com/package/accessible-ui-components)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 

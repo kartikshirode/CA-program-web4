@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible UI Components</title>
+  <meta name="description" content="Framework-independent, accessible UI components built with vanilla JavaScript">
+  
+  <!-- OpenGraph meta tags for social sharing -->
+  <meta property="og:title" content="Accessible UI Components">
+  <meta property="og:description" content="Modern, accessible, framework-independent UI components">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-vercel-app.vercel.app">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="./dist/ui-components.css">
+  
+  <style>
+    /* Landing page styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .landing-container {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+      margin: 2rem;
+    }
+    
+    .landing-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .landing-subtitle {
+      font-size: 1.25rem;
+      color: #4a5568;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+    
+    .feature {
+      padding: 1rem;
+      background: rgba(102, 126, 234, 0.1);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #2d3748;
+    }
+    
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      margin: 1rem 0.5rem;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    }
+    
+    .cta-button.secondary {
+      background: transparent;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+    
+    .cta-button.secondary:hover {
+      background: #667eea;
+      color: white;
+    }
+    
+    .github-link {
+      margin-top: 2rem;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    
+    .github-link a {
+      color: #667eea;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .landing-title {
+        font-size: 2rem;
+      }
+      
+      .landing-container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <h1 class="landing-title">Accessible UI Components</h1>
+    <p class="landing-subtitle">
+      Modern, framework-independent UI components built with vanilla JavaScript. 
+      Fully accessible, tested, and ready for production.
+    </p>
+    
+    <div class="features">
+      <div class="feature">
+        <span class="feature-icon">♿</span>
+        <strong>Fully Accessible</strong><br>
+        WCAG 2.1 AA compliant
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⚡</span>
+        <strong>Lightweight</strong><br>
+        No dependencies
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🧪</span>
+        <strong>Well Tested</strong><br>
+        136 comprehensive tests
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📱</span>
+        <strong>Touch Ready</strong><br>
+        Mobile & desktop support
+      </div>
+    </div>
+    
+    <div class="cta-buttons">
+      <a href="./demo/" class="cta-button">View Live Demo</a>
+      <a href="https://github.com/kartikshirode/CA-program-web4" class="cta-button secondary" target="_blank">View on GitHub</a>
+    </div>
+    
+    <div class="github-link">
+      <p>
+        Built with ❤️ by <a href="https://github.com/kartikshirode" target="_blank">Kartik Shirode</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

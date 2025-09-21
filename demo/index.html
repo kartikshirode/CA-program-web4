@@ -7,10 +7,7 @@
   <meta name="description" content="Interactive demo of framework-independent, accessible UI components built with vanilla JavaScript">
   
   <!-- Component Styles -->
-  <link rel="stylesheet" href="../src/styles/base.css">
-  <link rel="stylesheet" href="../src/styles/modal.css">
-  <link rel="stylesheet" href="../src/styles/tabs.css">
-  <link rel="stylesheet" href="../src/styles/carousel.css">
+  <link rel="stylesheet" href="../dist/ui-components.css">
   
   <!-- Demo Styles -->
   <style>
@@ -470,7 +467,7 @@ carousel.on('beforeChange', (data) =&gt; {
 
   <!-- Component Scripts -->
   <script type="module">
-    import { Modal, Tabs, Carousel } from '../src/index.js';
+    import { Modal, Tabs, Carousel } from '../dist/ui-components.js';
 
     // Initialize components when DOM is loaded
     document.addEventListener('DOMContentLoaded', () => {
