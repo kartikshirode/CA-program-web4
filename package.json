@@ -1,0 +1,59 @@
+{
+  "name": "accessible-ui-components",
+  "version": "1.0.0",
+  "description": "Framework-independent, accessible UI components built with vanilla JavaScript",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "live-server --host=localhost --port=3000 --open=/demo",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "rollup -c",
+    "build:css": "npm run concat:css",
+    "concat:css": "node build-css.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/**/*.js",
+    "format": "prettier --write src/**/*.{js,css,html}",
+    "prepare": "npm run build",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "ui-components",
+    "accessibility",
+    "vanilla-javascript",
+    "modal",
+    "tabs",
+    "carousel",
+    "a11y",
+    "framework-independent"
+  ],
+  "author": "Kartik",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.28.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "eslint": "^8.50.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "live-server": "^1.2.2",
+    "prettier": "^3.0.3",
+    "rollup": "^4.0.2"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartik/accessible-ui-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kartik/accessible-ui-components/issues"
+  },
+  "homepage": "https://kartik.github.io/accessible-ui-components"
+}

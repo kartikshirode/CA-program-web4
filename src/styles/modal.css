@@ -1,0 +1,232 @@
+/**
+ * Modal component styles
+ */
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--ui-zindex-modal-backdrop);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: var(--ui-transition-fade);
+  backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.show {
+  opacity: 1;
+}
+
+/* Modal container */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--ui-zindex-modal);
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ui-spacer);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Modal dialog */
+.modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: var(--ui-spacer) auto;
+  pointer-events: auto;
+}
+
+/* Responsive modal sizes */
+.modal-dialog.modal-sm {
+  max-width: 300px;
+}
+
+.modal-dialog.modal-lg {
+  max-width: 800px;
+}
+
+.modal-dialog.modal-xl {
+  max-width: 1140px;
+}
+
+/* Modal content */
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: var(--ui-white);
+  border: var(--ui-border);
+  border-radius: var(--ui-border-radius-lg);
+  box-shadow: var(--ui-box-shadow-lg);
+  outline: 0;
+}
+
+/* Modal header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--ui-spacer) var(--ui-spacer-lg);
+  border-bottom: var(--ui-border);
+  border-top-left-radius: var(--ui-border-radius-lg);
+  border-top-right-radius: var(--ui-border-radius-lg);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: var(--ui-font-size-lg);
+  font-weight: var(--ui-font-weight-bold);
+  line-height: var(--ui-line-height-base);
+  color: var(--ui-gray-900);
+}
+
+/* Modal close button */
+.modal-close {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: var(--ui-font-weight-bold);
+  line-height: 1;
+  color: var(--ui-gray-600);
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ui-border-radius);
+  transition: var(--ui-transition-base);
+}
+
+.modal-close:hover {
+  color: var(--ui-gray-900);
+  background-color: var(--ui-gray-200);
+}
+
+.modal-close:focus {
+  outline: none;
+  box-shadow: var(--ui-focus-ring);
+}
+
+/* Modal body */
+.modal-body {
+  position: relative;
+  flex: 1 1 auto;
+  padding: var(--ui-spacer-lg);
+  color: var(--ui-gray-800);
+  line-height: var(--ui-line-height-base);
+}
+
+/* Modal footer */
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ui-spacer-sm);
+  padding: var(--ui-spacer) var(--ui-spacer-lg);
+  border-top: var(--ui-border);
+  border-bottom-left-radius: var(--ui-border-radius-lg);
+  border-bottom-right-radius: var(--ui-border-radius-lg);
+}
+
+.modal-footer:empty {
+  display: none;
+}
+
+/* Modal buttons */
+.modal-footer .btn {
+  padding: var(--ui-spacer-sm) var(--ui-spacer);
+  border: var(--ui-border);
+  border-radius: var(--ui-border-radius);
+  background-color: var(--ui-white);
+  color: var(--ui-gray-800);
+  font-size: var(--ui-font-size-base);
+  font-weight: var(--ui-font-weight-normal);
+  cursor: pointer;
+  transition: var(--ui-transition-base);
+}
+
+.modal-footer .btn:hover {
+  background-color: var(--ui-gray-100);
+}
+
+.modal-footer .btn:focus {
+  outline: none;
+  box-shadow: var(--ui-focus-ring);
+}
+
+.modal-footer .btn-primary {
+  background-color: var(--ui-primary);
+  border-color: var(--ui-primary);
+  color: var(--ui-white);
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: var(--ui-primary-hover);
+  border-color: var(--ui-primary-hover);
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .modal {
+    padding: var(--ui-spacer-sm);
+  }
+  
+  .modal-dialog {
+    margin: 0;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .modal-content {
+    height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: var(--ui-spacer);
+  }
+}
+
+/* Animation for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .modal,
+  .modal-backdrop {
+    transition: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .modal-content {
+    border: 2px solid ButtonText;
+  }
+  
+  .modal-close {
+    border: 1px solid ButtonText;
+  }
+}

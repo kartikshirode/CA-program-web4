@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible UI Components - Demo</title>
+  <meta name="description" content="Interactive demo of framework-independent, accessible UI components built with vanilla JavaScript">
+  
+  <!-- Component Styles -->
+  <link rel="stylesheet" href="../src/styles/base.css">
+  <link rel="stylesheet" href="../src/styles/modal.css">
+  <link rel="stylesheet" href="../src/styles/tabs.css">
+  <link rel="stylesheet" href="../src/styles/carousel.css">
+  
+  <!-- Demo Styles -->
+  <style>
+    /* Demo-specific styles */
+    body {
+      font-family: var(--ui-font-family);
+      line-height: var(--ui-line-height-base);
+      color: var(--ui-gray-800);
+      background-color: var(--ui-gray-100);
+      margin: 0;
+      padding: 0;
+    }
+
+    .demo-header {
+      background: linear-gradient(135deg, var(--ui-primary), var(--ui-primary-hover));
+      color: var(--ui-white);
+      padding: var(--ui-spacer-xl) 0;
+      text-align: center;
+      box-shadow: var(--ui-box-shadow);
+    }
+
+    .demo-title {
+      margin: 0 0 var(--ui-spacer-sm) 0;
+      font-size: 2.5rem;
+      font-weight: var(--ui-font-weight-bold);
+    }
+
+    .demo-subtitle {
+      margin: 0;
+      font-size: var(--ui-font-size-lg);
+      opacity: 0.9;
+    }
+
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--ui-spacer-xl) var(--ui-spacer);
+    }
+
+    .demo-section {
+      background-color: var(--ui-white);
+      border-radius: var(--ui-border-radius-lg);
+      padding: var(--ui-spacer-xl);
+      margin-bottom: var(--ui-spacer-xl);
+      box-shadow: var(--ui-box-shadow-sm);
+    }
+
+    .demo-section-title {
+      margin: 0 0 var(--ui-spacer) 0;
+      font-size: 1.75rem;
+      font-weight: var(--ui-font-weight-bold);
+      color: var(--ui-gray-900);
+      border-bottom: 2px solid var(--ui-primary);
+      padding-bottom: var(--ui-spacer-sm);
+    }
+
+    .demo-description {
+      margin: 0 0 var(--ui-spacer-lg) 0;
+      color: var(--ui-gray-700);
+      font-size: var(--ui-font-size-base);
+    }
+
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--ui-spacer);
+      margin-bottom: var(--ui-spacer-lg);
+    }
+
+    .demo-button {
+      padding: var(--ui-spacer-sm) var(--ui-spacer);
+      background-color: var(--ui-primary);
+      color: var(--ui-white);
+      border: none;
+      border-radius: var(--ui-border-radius);
+      font-size: var(--ui-font-size-base);
+      font-weight: var(--ui-font-weight-normal);
+      cursor: pointer;
+      transition: var(--ui-transition-base);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-button:hover {
+      background-color: var(--ui-primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .demo-button:focus {
+      outline: none;
+      box-shadow: var(--ui-focus-ring);
+    }
+
+    .demo-button.secondary {
+      background-color: var(--ui-gray-600);
+    }
+
+    .demo-button.secondary:hover {
+      background-color: var(--ui-gray-700);
+    }
+
+    .demo-example {
+      border: var(--ui-border);
+      border-radius: var(--ui-border-radius);
+      overflow: hidden;
+      margin-bottom: var(--ui-spacer-lg);
+    }
+
+    .demo-example-content {
+      padding: var(--ui-spacer-lg);
+      background-color: var(--ui-gray-50);
+    }
+
+    .demo-code {
+      background-color: var(--ui-gray-900);
+      color: var(--ui-gray-100);
+      padding: var(--ui-spacer);
+      margin: 0;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .demo-carousel {
+      height: 300px;
+      border-radius: var(--ui-border-radius);
+      overflow: hidden;
+    }
+
+    .demo-slide {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: var(--ui-font-weight-bold);
+      color: var(--ui-white);
+    }
+
+    .demo-slide:nth-child(1) { background: linear-gradient(45deg, #ff6b6b, #ee5a6f); }
+    .demo-slide:nth-child(2) { background: linear-gradient(45deg, #4ecdc4, #44a08d); }
+    .demo-slide:nth-child(3) { background: linear-gradient(45deg, #45b7d1, #96c93d); }
+    .demo-slide:nth-child(4) { background: linear-gradient(45deg, #f093fb, #f5576c); }
+    .demo-slide:nth-child(5) { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+
+    .demo-tabs-example {
+      max-width: 600px;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--ui-spacer) 0;
+    }
+
+    .feature-list li {
+      padding: var(--ui-spacer-sm) 0;
+      border-bottom: 1px solid var(--ui-gray-200);
+      position: relative;
+      padding-left: var(--ui-spacer-lg);
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--ui-success);
+      font-weight: var(--ui-font-weight-bold);
+    }
+
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .accessibility-note {
+      background-color: var(--ui-info);
+      color: var(--ui-white);
+      padding: var(--ui-spacer);
+      border-radius: var(--ui-border-radius);
+      margin: var(--ui-spacer) 0;
+      font-size: var(--ui-font-size-sm);
+    }
+
+    .accessibility-note strong {
+      display: block;
+      margin-bottom: var(--ui-spacer-xs);
+    }
+
+    .demo-footer {
+      background-color: var(--ui-gray-800);
+      color: var(--ui-gray-300);
+      text-align: center;
+      padding: var(--ui-spacer-xl);
+      margin-top: var(--ui-spacer-xl);
+    }
+
+    .demo-footer a {
+      color: var(--ui-primary);
+      text-decoration: none;
+    }
+
+    .demo-footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .demo-title {
+        font-size: 2rem;
+      }
+      
+      .demo-container {
+        padding: var(--ui-spacer) var(--ui-spacer-sm);
+      }
+      
+      .demo-section {
+        padding: var(--ui-spacer);
+      }
+      
+      .demo-controls {
+        flex-direction: column;
+      }
+      
+      .demo-button {
+        width: 100%;
+      }
+      
+      .demo-carousel {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="demo-header">
+    <div class="demo-container">
+      <h1 class="demo-title">Accessible UI Components</h1>
+      <p class="demo-subtitle">Framework-independent, accessible UI components built with vanilla JavaScript</p>
+    </div>
+  </header>
+
+  <main class="demo-container">
+    <!-- Modal Demo -->
+    <section class="demo-section">
+      <h2 class="demo-section-title">Modal Dialog</h2>
+      <p class="demo-description">
+        A fully accessible modal dialog with focus trap, keyboard navigation, and ARIA compliance.
+        Features backdrop clicking, ESC key closing, and proper focus management.
+      </p>
+
+      <div class="accessibility-note">
+        <strong>Accessibility Features:</strong>
+        Focus trap keeps keyboard navigation within modal • ARIA roles and properties • ESC key closes modal • Focus returns to trigger element
+      </div>
+
+      <div class="demo-controls">
+        <button type="button" class="demo-button" id="modal-basic-trigger">Open Basic Modal</button>
+        <button type="button" class="demo-button secondary" id="modal-form-trigger">Open Form Modal</button>
+        <button type="button" class="demo-button secondary" id="modal-confirm-trigger">Open Confirmation Modal</button>
+      </div>
+
+      <div class="demo-example">
+        <div class="demo-example-content">
+          <h3>Usage Example:</h3>
+        </div>
+        <pre class="demo-code">const modal = new Modal({
+  backdrop: true,
+  keyboard: true,
+  focus: true
+});
+
+modal.setTitle('Example Modal')
+     .setBody('&lt;p&gt;Modal content goes here&lt;/p&gt;')
+     .setFooter('&lt;button class="btn btn-primary"&gt;Save&lt;/button&gt;')
+     .open();</pre>
+      </div>
+
+      <ul class="feature-list">
+        <li>Keyboard navigation with focus trap</li>
+        <li>ARIA roles and properties for screen readers</li>
+        <li>Customizable backdrop and keyboard behavior</li>
+        <li>Event callbacks for all modal states</li>
+        <li>Responsive design for mobile devices</li>
+      </ul>
+    </section>
+
+    <!-- Tabs Demo -->
+    <section class="demo-section">
+      <h2 class="demo-section-title">Tabbed Content</h2>
+      <p class="demo-description">
+        Accessible tabs with keyboard navigation, ARIA attributes, and support for both horizontal and vertical orientations.
+      </p>
+
+      <div class="accessibility-note">
+        <strong>Accessibility Features:</strong>
+        Arrow key navigation • ARIA tablist/tab/tabpanel roles • Proper focus management • Screen reader announcements
+      </div>
+
+      <div class="demo-example">
+        <div class="demo-example-content">
+          <div class="demo-tabs-example">
+            <div id="demo-tabs" class="tabs">
+              <div class="tab-panel" data-title="Overview">
+                <h3>Component Overview</h3>
+                <p>This tabs component provides a clean, accessible interface for organizing content into multiple sections. It supports keyboard navigation and follows WCAG guidelines.</p>
+                <ul>
+                  <li>Horizontal and vertical orientations</li>
+                  <li>Keyboard navigation with arrow keys</li>
+                  <li>Dynamic tab addition and removal</li>
+                  <li>Customizable activation behavior</li>
+                </ul>
+              </div>
+              <div class="tab-panel" data-title="Accessibility">
+                <h3>Accessibility Features</h3>
+                <p>Built with accessibility as a core requirement:</p>
+                <ul>
+                  <li>Proper ARIA roles and states</li>
+                  <li>Keyboard navigation support</li>
+                  <li>Screen reader compatibility</li>
+                  <li>Focus management</li>
+                  <li>High contrast mode support</li>
+                </ul>
+              </div>
+              <div class="tab-panel" data-title="Customization">
+                <h3>Customization Options</h3>
+                <p>Flexible configuration options:</p>
+                <ul>
+                  <li>Orientation (horizontal/vertical)</li>
+                  <li>Activation on focus or click</li>
+                  <li>Content destruction on hide</li>
+                  <li>Custom styling with CSS variables</li>
+                  <li>Event callbacks for state changes</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <pre class="demo-code">const tabs = new Tabs(element, {
+  orientation: 'horizontal',
+  activateOnFocus: false
+});
+
+// Add new tab dynamically
+tabs.addTab('New Tab', '&lt;p&gt;Tab content&lt;/p&gt;');
+
+// Listen for tab changes
+tabs.on('afterActivate', (data) =&gt; {
+  console.log('Tab activated:', data.index);
+});</pre>
+      </div>
+    </section>
+
+    <!-- Carousel Demo -->
+    <section class="demo-section">
+      <h2 class="demo-section-title">Carousel/Slider</h2>
+      <p class="demo-description">
+        Responsive carousel with touch/swipe support, keyboard controls, and full accessibility features.
+        Includes autoplay, infinite loop, and multiple transition effects.
+      </p>
+
+      <div class="accessibility-note">
+        <strong>Accessibility Features:</strong>
+        Keyboard navigation with arrow keys • ARIA live regions for announcements • Pause autoplay on focus/hover • Descriptive slide labels
+      </div>
+
+      <div class="demo-controls">
+        <button type="button" class="demo-button" id="carousel-autoplay-toggle">Toggle Autoplay</button>
+        <button type="button" class="demo-button secondary" id="carousel-prev">Previous Slide</button>
+        <button type="button" class="demo-button secondary" id="carousel-next">Next Slide</button>
+      </div>
+
+      <div class="demo-example">
+        <div class="demo-example-content">
+          <div id="demo-carousel" class="demo-carousel">
+            <div class="demo-slide">Slide 1 - Welcome</div>
+            <div class="demo-slide">Slide 2 - Features</div>
+            <div class="demo-slide">Slide 3 - Accessibility</div>
+            <div class="demo-slide">Slide 4 - Responsive</div>
+            <div class="demo-slide">Slide 5 - Touch Support</div>
+          </div>
+        </div>
+        <pre class="demo-code">const carousel = new Carousel(element, {
+  infinite: true,
+  autoplay: true,
+  autoplaySpeed: 3000,
+  arrows: true,
+  dots: true,
+  swipe: true
+});
+
+// Navigation methods
+carousel.nextSlide();
+carousel.prevSlide();
+carousel.goToSlide(2);
+
+// Event handling
+carousel.on('beforeChange', (data) =&gt; {
+  console.log('Changing to slide:', data.nextSlide);
+});</pre>
+      </div>
+
+      <ul class="feature-list">
+        <li>Touch and swipe gesture support</li>
+        <li>Keyboard navigation with arrow keys</li>
+        <li>Autoplay with pause on hover/focus</li>
+        <li>Infinite loop and fade transitions</li>
+        <li>Responsive breakpoint support</li>
+        <li>ARIA live regions for announcements</li>
+      </ul>
+    </section>
+
+    <!-- Features Overview -->
+    <section class="demo-section">
+      <h2 class="demo-section-title">Key Features</h2>
+      <p class="demo-description">
+        All components are built with modern web standards and accessibility best practices in mind.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--ui-spacer-lg);">
+        <div>
+          <h3>🔧 Framework Independent</h3>
+          <p>Pure vanilla JavaScript with no external dependencies. Works with any framework or as standalone components.</p>
+        </div>
+        <div>
+          <h3>♿ Accessibility First</h3>
+          <p>WCAG 2.1 compliant with ARIA roles, keyboard navigation, screen reader support, and focus management.</p>
+        </div>
+        <div>
+          <h3>📱 Responsive Design</h3>
+          <p>Mobile-first design with touch support, responsive breakpoints, and optimized performance.</p>
+        </div>
+        <div>
+          <h3>🎨 Customizable</h3>
+          <p>CSS custom properties for easy theming, extensive configuration options, and event-driven architecture.</p>
+        </div>
+        <div>
+          <h3>🧪 Well Tested</h3>
+          <p>Comprehensive unit tests with Jest, automated testing in CI/CD pipeline, and cross-browser compatibility.</p>
+        </div>
+        <div>
+          <h3>⚡ Performance</h3>
+          <p>Minimal bundle size, efficient DOM manipulation, and optimized for modern browsers with graceful degradation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="demo-footer">
+    <p>&copy; 2024 Accessible UI Components. Built with ❤️ and accessibility in mind.</p>
+    <p>
+      <a href="https://github.com/kartik/accessible-ui-components">View on GitHub</a> |
+      <a href="https://kartik.github.io/accessible-ui-components">Documentation</a>
+    </p>
+  </footer>
+
+  <!-- Component Scripts -->
+  <script type="module">
+    import { Modal, Tabs, Carousel } from '../src/index.js';
+
+    // Initialize components when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize Tabs
+      const tabsElement = document.getElementById('demo-tabs');
+      if (tabsElement) {
+        window.demoTabs = new Tabs(tabsElement);
+      }
+
+      // Initialize Carousel
+      const carouselElement = document.getElementById('demo-carousel');
+      if (carouselElement) {
+        window.demoCarousel = new Carousel(carouselElement, {
+          infinite: true,
+          autoplay: false,
+          autoplaySpeed: 3000,
+          arrows: true,
+          dots: true,
+          swipe: true
+        });
+      }
+
+      // Modal Examples
+      const basicModalTrigger = document.getElementById('modal-basic-trigger');
+      if (basicModalTrigger) {
+        basicModalTrigger.addEventListener('click', () => {
+          const modal = new Modal();
+          modal.setTitle('Basic Modal Example')
+               .setBody(`
+                 <p>This is a basic modal dialog demonstrating the core functionality.</p>
+                 <p>You can:</p>
+                 <ul>
+                   <li>Press ESC to close</li>
+                   <li>Click the backdrop to close</li>
+                   <li>Use Tab to navigate focusable elements</li>
+                   <li>Use the close button (×)</li>
+                 </ul>
+               `)
+               .setFooter('<button type="button" class="btn btn-primary" onclick="this.closest(\'.modal\').querySelector(\'.modal-close\').click()">Close</button>')
+               .open(basicModalTrigger);
+        });
+      }
+
+      const formModalTrigger = document.getElementById('modal-form-trigger');
+      if (formModalTrigger) {
+        formModalTrigger.addEventListener('click', () => {
+          const modal = new Modal();
+          modal.setTitle('Contact Form')
+               .setBody(`
+                 <form id="contact-form">
+                   <div style="margin-bottom: 1rem;">
+                     <label for="name" style="display: block; margin-bottom: 0.5rem;">Name:</label>
+                     <input type="text" id="name" name="name" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" required>
+                   </div>
+                   <div style="margin-bottom: 1rem;">
+                     <label for="email" style="display: block; margin-bottom: 0.5rem;">Email:</label>
+                     <input type="email" id="email" name="email" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" required>
+                   </div>
+                   <div style="margin-bottom: 1rem;">
+                     <label for="message" style="display: block; margin-bottom: 0.5rem;">Message:</label>
+                     <textarea id="message" name="message" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;" required></textarea>
+                   </div>
+                 </form>
+               `)
+               .setFooter(`
+                 <button type="button" class="btn" onclick="this.closest('.modal').querySelector('.modal-close').click()">Cancel</button>
+                 <button type="submit" class="btn btn-primary" onclick="alert('Form submitted!'); this.closest('.modal').querySelector('.modal-close').click();">Submit</button>
+               `)
+               .open(formModalTrigger);
+        });
+      }
+
+      const confirmModalTrigger = document.getElementById('modal-confirm-trigger');
+      if (confirmModalTrigger) {
+        confirmModalTrigger.addEventListener('click', () => {
+          const modal = new Modal();
+          modal.setTitle('Confirm Action')
+               .setBody(`
+                 <p>Are you sure you want to perform this action?</p>
+                 <p><strong>This action cannot be undone.</strong></p>
+               `)
+               .setFooter(`
+                 <button type="button" class="btn" onclick="this.closest('.modal').querySelector('.modal-close').click()">Cancel</button>
+                 <button type="button" class="btn btn-primary" style="background-color: #dc3545; border-color: #dc3545;" onclick="alert('Action confirmed!'); this.closest('.modal').querySelector('.modal-close').click();">Confirm</button>
+               `)
+               .open(confirmModalTrigger);
+        });
+      }
+
+      // Carousel Controls
+      const autoplayToggle = document.getElementById('carousel-autoplay-toggle');
+      if (autoplayToggle && window.demoCarousel) {
+        autoplayToggle.addEventListener('click', () => {
+          if (window.demoCarousel.autoplayTimer) {
+            window.demoCarousel.stopAutoplay();
+            autoplayToggle.textContent = 'Start Autoplay';
+          } else {
+            window.demoCarousel.options.autoplay = true;
+            window.demoCarousel.startAutoplay();
+            autoplayToggle.textContent = 'Stop Autoplay';
+          }
+        });
+      }
+
+      const carouselPrev = document.getElementById('carousel-prev');
+      if (carouselPrev && window.demoCarousel) {
+        carouselPrev.addEventListener('click', () => {
+          window.demoCarousel.prevSlide();
+        });
+      }
+
+      const carouselNext = document.getElementById('carousel-next');
+      if (carouselNext && window.demoCarousel) {
+        carouselNext.addEventListener('click', () => {
+          window.demoCarousel.nextSlide();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
